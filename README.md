@@ -20,13 +20,14 @@ public/ //production files
   ├ images
   ├ index.html // generated production index page
 
+package.json
 bower.json
 Gruntfile.js
 .gitignore
 ```
 
 ## Setup App
-* modify npm module and bower project name and version
+* modify package.json and bower project name and version
 * npm install --save-dev to get 3rd party dep
 * bower install --save to get 3rd party frtend dep
 
