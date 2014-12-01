@@ -4,21 +4,21 @@ Boilerplate for web application
 
 ## Structure
 ```
-app/ *src files*
-  ├ sass *style files*
+app/ //src files
+  ├ sass 
   ├ scripts
   ├ views
   ├ images
-  ├ index.html *dev index*
+  ├ index.html // dev index
   └
  
-public/ *production files*
+public/ //production files
   ├ styles
     ├ fonts
   ├ scripts
   ├ views
   ├ images
-  ├ index.html *dev index*
+  ├ index.html // generated production index page
 
 bower.json
 Gruntfile.js
