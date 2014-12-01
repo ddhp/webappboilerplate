@@ -13,13 +13,13 @@ module.exports = function (grunt) {
     compass: {
       dist: {
         options: {
-          sassDir: 'sass',
-          cssDir: 'css',
+          sassDir: '<%= appConfig.app %>/sass',
+          cssDir: '<%= appConfig.app %>/css',
           importPath: './bower_components',
           environment: 'production'
         }
       },
-      dev: {
+      serve: {
         options: {
           importPath: './bower_components',
           sassDir: '<%= appConfig.app %>/sass',
@@ -30,10 +30,10 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      // bower: {
-      //   files: ['bower.json'],
-      //   tasks: ['wiredep']
-      // },
+      bower: {
+        files: ['bower.json'],
+        tasks: ['wiredep']
+      },
       // js: {
       //   files: ['<%= appConfig.app %>/js/{,*/}*.js'],
       //   tasks: ['newer:jshint:all'],
@@ -74,22 +74,22 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          open: true,
+          open: false,
           middleware: function (connect) {
             return [
-              // connect.static('.tmp'),
-            connect().use(
+              connect.static('.tmp'),
+              connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
                 ),
-            connect.static(config.app)
-              ];
+              connect.static(config.app)
+            ];
           }
         }
       },
       dist: {
         options: {
-          open: true,
+          open: false,
           base: '<%= appConfig.dist %>'
         }
       }
@@ -133,12 +133,6 @@ module.exports = function (grunt) {
             cwd: 'bower_components/fontawesome/fonts/',
             src: '**',
             dest: '<%= appConfig.dist %>/fonts'
-          },
-          {
-            expand: true,
-            cwd: '<%= appConfig.app %>',
-            dest: '<%= appConfig.dist %>',
-            src: ['server.js', 'lyric.json', 'audio/*']
           }]
       }
     },
@@ -163,7 +157,7 @@ module.exports = function (grunt) {
     // performs rewrites based on filerev and the useminprepare configuration
     usemin: {
       html: ['<%= appConfig.dist %>/{,*/}*.html'],
-      css: ['<%= appConfig.dist %>/css/{,*/}*.css'],
+      css: ['<%= appConfig.dist %>/styles/{,*/}*.css'],
       options: {
         assetsdirs: ['<%= appConfig.dist %>','<%= appConfig.dist %>/images']
       }
@@ -171,10 +165,16 @@ module.exports = function (grunt) {
 
   }) // end of initConfig
 
-  grunt.registerTask('default', ['wiredep', 'compass', 'connect:livereload', 'watch']);
+  grunt.registerTask('serve', [
+      'wiredep', 
+      'compass:serve', 
+      'connect:livereload', 
+      'watch'
+      ]);
+
   grunt.registerTask('build', [
       'wiredep', 
-      'compass', 
+      'compass:dist', 
       'useminPrepare', 
       'copy',
       'concat:generated',
