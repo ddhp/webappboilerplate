@@ -1,4 +1,4 @@
-webappboilerplate
+# webappboilerplate
 
 Boilerplate for web application
 
@@ -46,7 +46,7 @@ Generated files will be put to `.tmp` folder
       
   5. watch - watch file change and do correspondant behavior
 
-run `grunt serve --dist` to have a server serving app built in `public` folder
+  run `grunt serve --dist` to have a server serving app built in `public` folder
 
 * build:
 Remember to put optional search folder (.tmp) into <!-- build:js(.tmp) scripts/app.js --> <!-- build:css(.tmp) styles/main.css --> blocks
