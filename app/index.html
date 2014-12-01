@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  
+    <title>Web App Infrastructure</title>
+
+    <!-- build:js(.) js/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/fulltilt/dist/fulltilt.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js js/app.js -->
+    <script src="js/script.js" type="text/javascript" charset="utf-8"></script>
+    <script src="standalone.js" type="text/javascript" charset="utf-8"></script>
+    <!-- endbuild -->
+
+    <!-- build:css css/main.css -->
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" charset="utf-8">
+  </script>
+
+  <div class="container">
+
+
+    <button type="button" id="start" class="btn btn-lg btn-default pull-right">Start</button>
+
+    <button type="button" id="stop" class="btn btn-lg btn-default pull-left">Stop</button>
+
+    <!-- <button type="button" id="speedup" class="btn btn&#45;lg btn&#45;block btn&#45;default">Speed ++</button> -->
+
+
+    <!-- <button type="button" id="brake" class="btn btn&#45;lg btn&#45;block btn&#45;default">Brake</button> -->
+
+
+    <button type="button" id="left" class="btn btn-lg  btn-default pull-left">Left</button>
+
+    <button type="button" id="reset" class="btn btn-lg  btn-default pull-left">Reset</button>
+
+    <button type="button" id="right" class="btn btn-lg  btn-default pull-right">Right</button>
+
+    <!-- <button type="button" id="speeddown" class="btn btn&#45;lg btn&#45;block btn&#45;default">Speed &#45;&#45;</button> -->
+    <h3 id="status"></h3>
+
+  </div>
+  </body>
+</html>

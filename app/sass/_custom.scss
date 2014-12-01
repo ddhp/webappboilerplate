@@ -1,0 +1,175 @@
+body {
+  scrollbar-track-color: transparent;
+}
+//
+// body:before {
+//   content: "";
+//   position: fixed;
+//   /* left: 0; */
+//   /* right: 0; */
+//   z-index: -1;
+//
+//   display: block;
+//   width: 120%;
+//   height: 120%;
+//   background-image: url('../images/bg_1.jpg');
+//   background-position: center center;
+//
+//   -webkit-filter: blur(8px);
+//   -moz-filter: blur(8px);
+//   -o-filter: blur(8px);
+//   -ms-filter: blur(8px);
+//   filter: blur(8px);
+// }
+
+.background-container {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.background {
+  background-image: url('../images/bg_1.jpg');
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  left:-15px;
+  right:-15px;
+  top:-15px;
+  bottom:-15px;
+  -webkit-filter: blur(10px) brightness(1.1);
+  -moz-filter: blur(10px) brightness(1.1);
+  -o-filter: blur(10px) brightness(1.1);
+  -ms-filter: blur(10px) brightness(1.1);
+  filter: blur(10px) brightness(1.1);
+
+  position: absolute;
+  z-index: 1;
+}
+
+span {
+outline: none;
+}
+
+@media (min-width: $screen-xs-min) {
+  .container {
+    width: $container-tablet;
+  }
+}
+
+.main {
+  background-color: rgba(0,0,0,.3);
+  border-radius: 5px;
+  padding: $main-padding;
+  color: $main-color;
+}
+
+.lyrics {
+  height: 310px;
+  text-align: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+  margin: $main-padding 0 35px;
+
+  .title {
+    margin-top: 0;
+  }
+
+  .author {
+    margin-bottom: 12px;
+  }
+
+  p {
+    @include transition(font .2s, color .2s);
+    @include transition-timing-function(ease-in-out);
+  }
+
+  p.active {
+    // @include scale(1.1);
+    font-size: 16px;
+    color: white;
+  }
+}
+
+::-webkit-scrollbar * {
+  background:transparent;
+}
+
+::-webkit-scrollbar-track
+{
+}
+
+::-webkit-scrollbar
+{
+	width: 6px;
+	// background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgba(255,255,255,.5);
+}
+
+.ctrlpanel {
+  height: 100px;
+}
+
+
+// player-ctrl
+/* play/pause control */
+
+.acorn-player.audio-player {
+  width: 100%;
+}
+
+.acorn-play-button {
+  position: absolute;
+  cursor: pointer;
+  top: 34px;
+  left: 46%;
+  background-image: url('../images/playui/play.png');
+  background-repeat: no-repeat;
+  width: 33px;
+  height: 46px;
+}
+
+.acorn-paused-button {
+  background-image: url('../images/playui/pause.png');
+}
+.acorn-seek-slider {
+  width: 100%;
+  height: 5px;
+
+  .ui-slider-handle {
+    background-image: url('../images/playui/slidebar.png');
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: block;
+    top: -7px;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .ui-slider-range-min {
+    background-color: #62c6c7;
+  }
+}
+
+.acorn-buffer {
+  background-color: #888;
+}
+
+.acorn-timer {
+  float: right;
+}

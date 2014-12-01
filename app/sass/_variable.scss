@@ -1,0 +1,15 @@
+// $screen-sm-min:              $screen-sm !default;
+// $screen-md-min:              $screen-sm !default;
+// $screen-lg-min:              $screen-sm !default;
+$container-tablet:             (450px + $grid-gutter-width);
+// $container-desktop:            (550px + $grid-gutter-width);
+// $container-large-desktop:      (550px + $grid-gutter-width);
+$container-sm:                 $container-tablet;
+$container-md:                 $container-tablet;
+$container-lg:                 $container-tablet;
+
+$grid-float-breakpoint:     $screen-xs-min;
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1) ;
+
+$main-padding: 15px;
+$main-color: #ddd;

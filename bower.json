@@ -1,0 +1,21 @@
+{
+  "name": "nodeboat",
+  "version": "0.0.1",
+  "authors": [
+    "ddhp <sevenknee@gmail.com>"
+  ],
+  "description": "nodeboat",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap-sass-official": "~3.3.1",
+    "fulltilt": "~0.5.1"
+  }
+}

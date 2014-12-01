@@ -1,0 +1,43 @@
+#left {
+  width: 30%;
+  height: 50%;
+  opacity: 0;
+}
+
+#right {
+  width: 30%;
+  height: 50%;
+  opacity: 0;
+}
+
+#reset {
+  width: 30%;
+  height: 50%;
+  margin-left: 5%;
+  opacity: 0;
+}
+
+#speeddown {
+  margin-top: 3%;
+}
+
+#start {
+  width: 40%;
+  height: 40%;
+  opacity: 0;
+}
+
+#stop {
+  width: 40%;
+  height: 40%;
+  opacity: 0;
+}
+
+#status {
+  text-align: center;
+}
+
+body {
+  background-image: url("bg-01.jpg");
+  background-size: 100% 100%;
+}
