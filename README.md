@@ -5,20 +5,20 @@ Boilerplate for web application
 ## Structure
 ```
 app/ //src files
-  ├ sass 
-  ├ scripts
-  ├ views
-  ├ images
-  ├ index.html // dev index
-  └
+├ sass 
+├ scripts
+├ views
+├ images
+├ index.html // dev index
+└
  
 public/ //production files
-  ├ styles
-    ├ fonts
-  ├ scripts
-  ├ views
-  ├ images
-  ├ index.html // generated production index page
+├ styles
+  ├ fonts
+├ scripts
+├ views
+├ images
+├ index.html // generated production index page
 
 package.json
 bower.json
