@@ -14,7 +14,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           sassDir: '<%= appConfig.app %>/sass',
-          cssDir: '<%= appConfig.app %>/css',
+          cssDir: '<%= appConfig.dist %>/styles',
           importPath: './bower_components',
           environment: 'production'
         }
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
         options: {
           importPath: './bower_components',
           sassDir: '<%= appConfig.app %>/sass',
-          cssDir: '<%= appConfig.app %>/css'
+          cssDir: '.tmp/styles'
         }
       }
     },
@@ -47,7 +47,7 @@ module.exports = function (grunt) {
       // },
       compass: {
         files: ['<%= appConfig.app %>/sass/{,*/}*.{scss,sass}'],
-        tasks: ['compass:dev']
+        tasks: ['compass:serve']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= appConfig.app %>/{,*/}*.html',
-          'css/{,*/}*.css',
+          '.tmp/styles/{,*/}*.css',
           '<%= appConfig.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 7000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: '0.0.0.0',
         livereload: 35729
@@ -90,7 +90,9 @@ module.exports = function (grunt) {
       dist: {
         options: {
           open: false,
-          base: '<%= appConfig.dist %>'
+          base: '<%= appConfig.dist %>',
+          keepalive: true,
+          livereload: false
         }
       }
     },
@@ -99,7 +101,7 @@ module.exports = function (grunt) {
     wiredep: {
       options: {
         // cwd: '<%= appConfig.app %>',
-        exclude: ['bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/']
+        // exclude: ['bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/']
       },
       app: {
         src: ['<%= appConfig.app %>/index.html'],
@@ -109,31 +111,56 @@ module.exports = function (grunt) {
 
     copy: {
       dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= appConfig.app %>',
-          dest: '<%= appConfig.dist %>',
-          src: [
-            '*.{ico,png,txt}',
-            '.htaccess',
-            '*.html',
-            'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
-            'images/**',
-            'fonts/*',
-            'css/**'
-          ]}, {
+        files: [
+          {
             expand: true,
+            dot: true,
+            cwd: '<%= appConfig.app %>',
+            dest: '<%= appConfig.dist %>',
+            src: [
+              '*.{ico,png,txt}',
+              '.htaccess',
+              '*.html',
+              'views/{,*/}*.html',
+              'images/{,*/}*.{webp}',
+              'images/**',
+              'fonts/*',
+              'css/**'
+            ]
+          }, 
+          {
+            expand: true,
+            flatten: true,
             cwd: '.',
             src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
-            dest: '<%= appConfig.dist %>'
-          }, {
+            dest: '<%= appConfig.dist %>/styles/fonts/'
+          }, 
+          {
             expand: true,
+            flatten: true,
             cwd: 'bower_components/fontawesome/fonts/',
             src: '**',
-            dest: '<%= appConfig.dist %>/fonts'
-          }]
+            dest: '<%= appConfig.dist %>/styles/fonts/'
+          }
+        ]
+      },
+      // copy font files to .tmp/styles/fonts/
+      serve: {
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*',
+            dest: '.tmp/styles/fonts'
+          }, 
+          {
+            expand: true,
+            flatten: true,
+            cwd: 'bower_components/fontawesome/fonts/',
+            src: '**',
+            dest: '.tmp/styles/fonts'
+          }
+        ]
       }
     },
 
@@ -161,25 +188,48 @@ module.exports = function (grunt) {
       options: {
         assetsdirs: ['<%= appConfig.dist %>','<%= appConfig.dist %>/images']
       }
+    },
+
+    clean: {
+      dist: {
+        files: [{
+        dot: true,
+          src: [
+          '.tmp',
+          '<%= appConfig.dist %>/{,*/}*',
+          '!<%= appConfig.dist %>/.git*'
+          ]
+        }]
+      },
+      serve: '.tmp'
     }
 
   }) // end of initConfig
 
-  grunt.registerTask('serve', [
+  grunt.registerTask('serve', 'Start serve', function () {
+    var isDist = grunt.option('dist');
+    if (isDist) {
+      return grunt.task.run(['build', 'connect:dist']);
+    }
+    grunt.task.run([
+      'clean:serve',
       'wiredep', 
       'compass:serve', 
       'connect:livereload', 
+      'copy:serve',
       'watch'
-      ]);
+    ]);
+  });
 
   grunt.registerTask('build', [
-      'wiredep', 
-      'compass:dist', 
-      'useminPrepare', 
-      'copy',
-      'concat:generated',
-      'cssmin:generated',
-      'uglify:generated', 
-      'usemin'
-      ]);
+    'clean:dist',
+    'wiredep', 
+    'compass:dist', 
+    'useminPrepare', 
+    'copy:dist',
+    'concat:generated',
+    'cssmin:generated',
+    'uglify:generated', 
+    'usemin'
+  ]);
 }
